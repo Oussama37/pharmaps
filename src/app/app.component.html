@@ -1,24 +1,36 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Navbar</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<div class="search-users">
+  <input ngModel id="ser" style="margin-left:300px; margin-bottom: 20px; margin-top: 20px;" class="form-control w-50" type="text" name="search" [(ngModel)]="searchText" placeholder="Search  Users" >
+</div>
+<br>
+<br>
+<br>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-    </form>
-  </div>
-</nav>
-<br>
-<br>
-<br>
-<agm-map *ngFor="let u of postion " [latitude]="u.lat" [longitude]="u.lng">
-  <agm-marker [latitude]="u.lat" [longitude]="u.lng"></agm-marker>
-</agm-map>
+<table class="table table-dark" id="ddd">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nom Pharmacie</th>
+        <th scope="col">Adresse</th>
+        <th scope="col">MAP</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let u of postion | filter: searchText">
+        <th>{{u.id}}</th>
+        <th>{{u.nomPharmacie}}</th>
+        <th>{{u.adresse}}</th>
+        <th><button type="button" class="btn btn-outline-success"  (click)="getPosByName(u.id)"
+          >MAP</button>
+        </th>
+      </tr>
+      <tr>
+    </tbody>
+  </table>
+<agm-map *ngIf="this.pharmaa" >
+  <agm-marker   *ngFor="let uu of this.pharmaa " [latitude]="uu.x" [longitude]="uu.y"></agm-marker>
+</agm-map> 
+<agm-map  >
+  <agm-marker  *ngFor="let uu of this.postion " [latitude]="uu.x" [longitude]="uu.y"></agm-marker>
+</agm-map> 
+<p>hhhh</p>
+

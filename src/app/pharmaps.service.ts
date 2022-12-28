@@ -9,6 +9,10 @@ export class PharmapsService {
   constructor(private httpclient: HttpClient ) { }
 
   public getposition(){
-    return this.httpclient.get(this.PATH_OF_API + "/map/pharmas");
+    return this.httpclient.get(this.PATH_OF_API + "/PharmacieWebWS/pharmacies");
   }
+
+  getZoneById(id:any) {
+    return this.httpclient.get(this.PATH_OF_API + `/PharmacieWebWS/pharmacies/${id}`);
+   }
 }
